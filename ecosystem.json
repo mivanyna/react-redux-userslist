@@ -1,0 +1,19 @@
+{
+  "apps": [
+    {
+      "name": "userlist",
+      "script": "bin/server.js",
+      "exec_mode": "cluster",
+      "instances": 2,
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "env_staging": {
+        "NODE_ENV": "staging"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
