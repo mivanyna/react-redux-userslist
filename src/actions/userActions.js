@@ -55,3 +55,26 @@ export function createUserSuccess(user) {
 export function createUserError(error) {  
   return {type: consts.CREATE_USER_REJECTED, payload: error};
 }
+
+
+export function deleteUser(user) {  
+  return function (dispatch) {
+    axios.delete('/api/users/'+ user.id)
+      .then((response) => {
+        dispatch(deleteUserSuccess(user));
+      })
+      .catch((err) => {        
+        dispatch(deleteUserError(err));
+        console.error(err);
+      })
+  };
+}
+
+export function deleteUserSuccess(user) {  
+  return {type: consts.DELETE_USER_SUCCESS, user};
+}
+
+export function deleteUserError(error) {  
+  return {type: consts.DELETE_USER_REJECTED, payload: error};
+}
+

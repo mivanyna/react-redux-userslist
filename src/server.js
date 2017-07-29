@@ -55,6 +55,17 @@ const routes = (app) => {
       res.status(400).send({ errors });
     }
   })
+  
+  app.delete('/api/users/:userId', (req, res) => {
+      const userId = req.params.userId;
+      const users = db.get('/users') || [];
+      const filteredUser = users.filter(usr => usr.id != userId);
+      
+      db.put('/users', filteredUser, () => {
+        res.send(true);
+      });   
+  })
+  
 };
 
 module.exports = function apiServer(app) {

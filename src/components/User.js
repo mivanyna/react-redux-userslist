@@ -16,6 +16,7 @@ class User extends React.Component {
     this.updateUserState = this.updateUserState.bind(this);
     this.saveUser = this.saveUser.bind(this);
     this.cancel = this.cancel.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
   
   cancel() {
@@ -39,6 +40,10 @@ class User extends React.Component {
     this.setState({isEditing: !this.state.isEditing})
   }
   
+  deleteUser() {
+    this.props.actions.deleteUser(this.state.user);
+  }
+  
   componentWillReceiveProps(nextProps) {
     if (this.props.user.id != nextProps.user.id) {
       this.setState({user: nextProps.user,  isEditing: false});
@@ -50,7 +55,7 @@ class User extends React.Component {
     if (this.state.isEditing) {
       return (
         <div className="col-xs-8 col-xs-offset-2">
-          <h1>edit user</h1>
+          <h1>Edit user {this.state.user.fullName}</h1>
           <UserForm
              user={this.state.user}
              onSave={this.saveUser} 
@@ -66,7 +71,10 @@ class User extends React.Component {
             <p>Description: {this.props.user.description}</p>
             <p>Tags: {this.props.user.tags}</p>
             <p>Contact: {this.props.user.contacts}</p>
-            <button onClick={this.toggleEdit} className="btn btn-default">Edit</button>
+            <div className="form-input-group">
+              <button onClick={this.toggleEdit} className="btn btn-default">Edit</button>
+              <button onClick={this.deleteUser} className="btn btn-warning">Delete</button>
+            </div>
           </div>
        )
   }

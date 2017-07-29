@@ -9,9 +9,9 @@ class Users extends React.Component {
     return (
       <div className="col-xs-12">
         <h3>Users</h3>
-        <div><Link to={'/users/new'} className="btn btn-primary">
+        <p><Link to={'/users/new'} className="btn btn-primary">
           + User
-        </Link></div> 
+        </Link></p> 
         <div className="col-xs-4">
           <UserList users={this.props.users} />
         </div>
