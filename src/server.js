@@ -45,7 +45,7 @@ const routes = (app) => {
       const userId = req.params.userId;
       const { fullName, description, tags, contacts } = req.body;      
       const users = db.get('/users') || [];
-      const user = users.filter(usr => usr.id == userId);
+      const user = users.find(usr => usr.id == userId);
       Object.assign(user, { fullName, description, tags, contacts });
       db.put('/users', users, () => {
         res.send(user);

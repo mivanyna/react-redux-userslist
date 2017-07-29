@@ -1,11 +1,9 @@
 import * as consts from '../constants';
 import axios from "axios";
 
-const baseUrl = '/';
-
 export function fetchUsers(){
   return function(dispatch){
-    axios.get(baseUrl + 'api/users?page=1')
+    axios.get('/api/users')
       .then((response) => {
         dispatch({type: consts.FETCH_USERS_FULFILLED, payload:response.data});
       })
@@ -17,7 +15,7 @@ export function fetchUsers(){
 
 export function updateUser(user) {  
   return function (dispatch) {
-    axios.put(baseUrl + '/api/users/' + user.id, user)
+    axios.put('/api/users/' + user.id, user)
       .then((response) => {
         dispatch(updateUserSuccess(response.data));
       })

@@ -63,7 +63,9 @@ class User extends React.Component {
      return (
           <div className="col-xs-8 col-xs-offset-2"> 
             <h2>{this.props.user.fullName}</h2>
-            <p>{this.props.user.description}</p>
+            <p>Description: {this.props.user.description}</p>
+            <p>Tags: {this.props.user.tags}</p>
+            <p>Contact: {this.props.user.contacts}</p>
             <button onClick={this.toggleEdit} className="btn btn-default">Edit</button>
           </div>
        )
@@ -84,7 +86,7 @@ function mapStateToProps(state, ownProps) {
   };
   const userId = ownProps.params.id;
   const users = state.user.users;
-  if (userId && users.length){
+  if (userId && users && users.length){
     user = Object.assign({}, users.find(user => user.id == userId))
   }
   return {

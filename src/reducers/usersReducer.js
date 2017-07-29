@@ -29,16 +29,22 @@ export default function userReducer(state=initialState, action = {}) {
       }
     }
     case consts.UPDATE_USER_SUCCESS: {
-      return [ 
+      const users = [
         ...state.users.filter(user => user.id != action.user.id),
         Object.assign({}, action.user)
-      ]
+      ];
+      return {
+        ...state,
+        users
+      }
     }
     case consts.CREATE_USER_SUCCESS: {
       browserHistory.push(`/users/${action.user.id}`);
-      return [...state.users.filter(user => user.id != action.user.id),
-        Object.assign({}, action.user)
-      ]
+      return {
+        ...state,
+        users: [...state.users.filter(user => user.id != action.user.id),
+        Object.assign({}, action.user)]
+      }
     }
   }
   return state;
